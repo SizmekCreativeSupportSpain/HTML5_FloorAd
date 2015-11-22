@@ -7,16 +7,15 @@
         <script type="text/javascript" src="../js/EBLoader.js"></script>
         
 		<script>
-			var smallPanel,expandBtn,closeButton,delayTimeout;
+			var expandBtn, delayTimeout = null;
 			
 			function startAd() {
-				smallPanel = document.getElementById("smallPanel");
+				var smallPanel = document.getElementById("smallPanel");
 				smallPanel.style.width = adConfig.panel_small_width+"px";
 				smallPanel.style.height = adConfig.panel_small_height+"px";
-
-				closeButton = document.getElementById("closeButton");
-				closeButton.addEventListener('click',function(){
-					EB.collapse({panelName: "autoPanel",
+				
+				document.getElementById("closeButton").addEventListener('click',function(){
+					EB.collapse({panelName: "smallPanel",
 				                actionType: EBG.ActionType.USER});
 				});			
 				
@@ -44,7 +43,7 @@
 						EB.expand({panelName: "bigPanel",
 				                  actionType: EBG.ActionType.USER});
 						resetTimeout();
-					},adConfig.delay_expansion);
+						},adConfig.delay_expansion);
 				}
 			}
 			function isReallyOutBanner(event){
