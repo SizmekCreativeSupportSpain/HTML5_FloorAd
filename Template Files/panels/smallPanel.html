@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>FloorAd Small Panel</title>
+        <link rel="stylesheet" href="style.css"/>
+        <script type="text/javascript" src="../adConfig.js"></script>
+        <script type="text/javascript" src="../js/EBLoader.js"></script>
+        
+		<script>
+			var smallPanel,expandBtn,closeButton,delayTimeout;
+			
+			function startAd() {
+				smallPanel = document.getElementById("smallPanel");
+				smallPanel.style.width = adConfig.panel_small_width+"px";
+				smallPanel.style.height = adConfig.panel_small_height+"px";
+
+				closeButton = document.getElementById("closeButton");
+				closeButton.addEventListener('click',function(){
+					EB.collapse({panelName: "autoPanel",
+				                actionType: EBG.ActionType.USER});
+				});			
+				
+				expandBtn = document.getElementById("expandBtn");
+				if (is_touch_device() === false) {
+					expandBtn.addEventListener("mouseover", onMouseOverConfig);
+					expandBtn.addEventListener("click", function(){
+					    EB.clickthrough("click_SmallPanel");
+					});
+				}else{
+					expandBtn.addEventListener("click", function(){
+						EB.expand({panelName: "bigPanel",
+							      actionType: EBG.ActionType.USER});
+					});
+				}
+			
+			}
+			
+			function onMouseOverConfig(event){
+				expandBtn.removeEventListener("mouseover", onMouseOverConfig);
+				expandBtn.addEventListener("mouseout",isReallyOutBanner);
+				expandBtn.addEventListener("mouseleave",isReallyOutBanner);
+				if(delayTimeout === null){
+					delayTimeout = setTimeout(function(){
+						EB.expand({panelName: "bigPanel",
+				                  actionType: EBG.ActionType.USER});
+						resetTimeout();
+					},adConfig.delay_expansion);
+				}
+			}
+			function isReallyOutBanner(event){
+				if(event.clientX>=adConfig.panel_small_width || event.clientX<=0 || event.clientY>=adConfig.panel_small_height || event.clientY<=0){
+			        resetTimeout();
+			    	expandBtn.removeEventListener("mouseout",isReallyOutBanner);
+			    	expandBtn.removeEventListener("mouseleave",isReallyOutBanner);
+			    	expandBtn.addEventListener("mouseover", onMouseOverConfig);
+			    }
+			}
+			function resetTimeout(){
+				clearTimeout(delayTimeout);
+				delayTimeout = null;
+			}
+			
+		</script>
+	</head>
+	<body>
+		<div id="smallPanel">
+			<button id="expandBtn"></button>
+			<button id="closeButton" class="button close"></button>
+		</div>
+	</body>
+</html>
+
