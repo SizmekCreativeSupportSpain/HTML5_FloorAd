@@ -4,7 +4,7 @@ Plantilla genérica con todo lo necesario para crear formatos tipo FloorAd utili
 
 ## Descripción
 
-La plantilla para montar un FloorAd consta de tres ficheros html, uno que funcionará de base del formato y que no es necesario modificar(index.html); otro para el panel de menor tamaño (smallPanel.html)y el ultimo para el panel de mayor tamaño (bigPanel.html).
+La plantilla para montar un FloorAd consta de tres ficheros html, uno que funcionará de base del formato y que no es necesario modificar(*index.html*); otro para el panel de menor tamaño (*smallPanel.html*) y el ultimo para el panel de mayor tamaño (*bigPanel.html*).
 
 ## Configuración 
 
