@@ -1,0 +1,33 @@
+<!DOCTYPE html> <html>
+	<head>
+ 		<title>FloorAd 1x1</title>
+        <script type="text/javascript" src="js/EBLoader.js"></script>
+        <script>
+			function initEB(){
+				if (!EB.isInitialized()) {
+					EB.addEventListener(EBG.EventName.EB_INITIALIZED, onInit);
+				}else {
+					onInit();
+				}
+			}
+			
+			function onInit() {
+				EB.expand({panelName: "smallPanel",
+				          actionType: EBG.ActionType.AUTO});
+			}
+			window.addEventListener("load", initEB);
+		</script>
+		<style>
+			#banner{
+			  position:absolute;
+			  display: block;
+			  width: 1px;
+			  height: 1px;
+			}
+		</style>
+	</head>
+	<body>
+        <div id="banner"></div>
+	</body>
+</html>
+
